@@ -1,0 +1,81 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+
+{% block title %}Create your event - Ercess Live{% endblock title %}
+{% block step_one %}
+
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Create your event</h1>
+                <div class="md-stepper-horizontal red">
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% if flag %}
+      {% if serializer.errors %}
+        {% for key,value in serializer.errors.items %}
+          <div class="alert alert-danger">
+             <strong style="color: white">{{ key|title }} : {{ value.0 }}</strong>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+
+    <form action="" method="POST" id="msform" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+        <fieldset>
+            {% render_form serializer template_pack='rest_framework/vertical' %}
+
+            <button type="submit" class="btn btn1 btn-danger btn-block mt-10">Create Event</button>
+
+        </fieldset>
+    </form>
+
+
+
+</section>
+{% endblock step_one %}

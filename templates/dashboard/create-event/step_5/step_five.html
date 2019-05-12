@@ -1,0 +1,294 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% block title %}Create tickets to sell - Ercess Live{% endblock title %}
+
+
+{% block step_one %}
+<section class="content">
+   <div class="container arrow-steps clearfix">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="md-stepper-horizontal red">
+                  <div class="md-step active done">
+                    <div class="md-step-circle"><span>1</span></div>
+                    <div class="md-step-title">Basic details</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+                  <div class="md-step active done">
+                    <div class="md-step-circle"><span>2</span></div>
+                    <div class="md-step-title">Set targets</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+                  <div class="md-step active done">
+                    <div class="md-step-circle"><span>3</span></div>
+                    <div class="md-step-title">Upload images</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+                  <div class="md-step active done">
+                    <div class="md-step-circle"><span>4</span></div>
+                    <div class="md-step-title">Description</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+                  <div class="md-step active">
+                    <div class="md-step-circle"><span>5</span></div>
+                    <div class="md-step-title">Add tickets</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+                  <div class="md-step">
+                    <div class="md-step-circle"><span>6</span></div>
+                    <div class="md-step-title">Custom questions</div>
+                    <div class="md-step-bar-left"></div>
+                    <div class="md-step-bar-right"></div>
+                  </div>
+              </div>
+
+              {% if flag == True %}
+              <div style="color:grey">
+                <h2>Your Event Details</h2>
+                  <div id="Div1" >
+                  <table class="table">
+                     <tr>
+                        <th>Event Id</th>
+                        <th>Ticket Name</th>
+                        <th>Ticket Price</th>
+                        <th>Start Date</th>
+                        <Th>End Date</Th>
+                     </tr>
+
+                     {% for i in ticket %}
+
+                        {% if cureventid == i.event_id %}
+                        <tr>
+                        <td>{{ i.event_id }}</td>
+                        <td>{{ i.ticket_name }}</td>
+                        <td>{{ i.ticket_price }}</td>
+                        <td>{{ i.ticket_start_date }}</td>
+                        <td>{{ i.expiry_date }}</td>
+                        </tr>
+                        {% endif %}
+
+                     {% endfor %}
+                  </table>
+
+                  <input id="Button1" type="button" class="btn btn2 btn-danger btn-block mt-50"
+                      value="Create New Ticket" onclick="switchVisible();"/>
+                  <button type="submit" class="btn btn2 btn-danger btn-block mt-50">Done</button>
+               </div>
+
+               <div id="Div2">
+                <p class="text-center">Note:Organizer Must pay both Ercess fee and Transaction fee for all events.</p>
+                    <form action="" method="POST" id="msform" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+                      <fieldset>
+                          {% render_form serializer template_pack='rest_framework/vertical' %}
+                          <button type="submit" class="btn btn2 btn-danger btn-block mt-50">Next</button>
+                      </fieldset>
+                  </form>
+              </div>
+
+            </div>
+          </div>
+      </div>
+  </div>
+
+
+<script>
+  function switchVisible() {
+    if (document.getElementById('Div1')) {
+
+        if (document.getElementById('Div1').style.display == 'none') {
+            document.getElementById('Div1').style.display = 'block';
+            document.getElementById('Div2').style.display = 'none';
+        }
+        else {
+            document.getElementById('Div1').style.display = 'none';
+            document.getElementById('Div2').style.display = 'block';
+        }
+    }
+ }
+ </script>
+ <style>  #Div2 {  display:none;  }  </style>
+
+ {% elif flag == False %}
+
+   <div>
+      <p style="color:black;text-align:center">Note:Organizer must pay both Ercess
+      fee and Transaction fee for all events.</p>
+
+      <form action="" method="POST" id="msform" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+        <fieldset>
+            {% render_form serializer template_pack='rest_framework/vertical' %}
+            <button type="submit" class="btn btn2 btn-danger btn-block mt-50">Next</button>
+        </fieldset>
+    </form>
+   </div>
+   {% endif %}
+
+  <!--form action="" class="col-md-12 mt-50 mb-50" method="POST" id="msform"-->
+
+
+
+
+
+    <script>
+      var event_date = "{{ event_start_date }}";
+       $('#startdateticket').datepicker({
+
+            			format: 'dd/mm/yyyy',
+                                    startDate: new Date()
+            	         }).on('change', function() {
+        	            $(this).valid();  // triggers the validation test
+
+    	         });
+
+              $('#enddateticket').datepicker({
+                  format: 'dd/mm/yyyy',
+                  startDate: new Date()
+              }).on('change', function() {
+                  $(this).valid();  // triggers the validation test
+
+              });
+
+
+              //starttime
+              $('#starttimepicker').datetimepicker({
+                  format: 'LT',
+
+              }).on('change', function() {
+                  $(this).valid();  // triggers the validation test
+
+              });
+
+              //endtime
+              $('#endtimepicker').datetimepicker({
+                  format: 'LT'
+
+              }).on('change', function() {
+                  $(this).valid();  // triggers the validation test
+              });
+
+
+               jQuery.validator.addMethod("enddatestep5", function(enddatevalue, element) {
+		     var startdatevalue = $('#startdateticket').val();
+                     console.log(typeof(startdatevalue));
+                     var arrsdate = startdatevalue.split('/');
+                     var arredate = enddatevalue.split('/');
+		     return new Date(arrsdate[2], arrsdate[1], arrsdate[0]) <= new Date(arredate[2],arredate[1],arredate[0]);
+	         }, "End date can not be less than Start Date.");
+
+             $.validator.addMethod("eventdate", function(datevalue, element) {
+                     var arrsdate = event_date.split('/');
+                     var arredate = datevalue.split('/');
+
+		     return new Date(arrsdate[2], arrsdate[0], arrsdate[1]) > new Date(arredate[2],arredate[1],arredate[0]);
+	       }, "Date can not be greater than Start Date of Event.");
+
+
+$(".btn5").click(function () {
+  form = $("#msform");
+
+  form.validate({
+
+    rules: {
+      ticket_name: {
+        required: true,
+        //minlength: 5,
+      },
+      ticket_price: {
+        required: true,
+        digits: true
+
+      },
+      ticket_qty: {
+        required: true,
+        digits: true
+
+      },
+      min_qty: {
+        required: true,
+        digits: true
+
+      },
+      max_qty: {
+        required: true,
+        digits: true
+      },
+      other_charges_type: {
+
+        required: function (element) {
+          return $("#other_charges").val().length > 0;
+        }
+      },
+      start_date: {
+        required: true,
+        eventdate: true
+      },
+      end_date: {
+        required: true,
+        enddatestep5: true,
+        eventdate: true
+      },
+      start_time_step5: {
+        required: true,
+      },
+      end_time_step5: {
+        required: true,
+
+      },
+
+
+    },
+    highlight: function (element) {
+      // add a class "has_error" to the element
+      $(element).next('div').addClass('has_error');
+    },
+    unhighlight: function (element) {
+      // remove the class "has_error" from the element
+      $(element).next('div').removeClass('has_error');
+    },
+    messages: {
+      ticket_name: {
+        required: "Please provide name of your ticket",
+
+      },
+
+      start_date: {
+        required: "Provide the Start Date",
+        // eventdate: "Date can not be greater than Start Date of Event."
+      },
+      end_date: {
+        required: "Provide the End Date",
+        enddatestep5: "End Date cannot be less than Start Date.",
+        // eventdate: "Date can not be greater than Start Date of Event."
+      },
+      start_time_step5: {
+        required: "Provide Start Time",
+      },
+      end_time_step5: {
+        required: "Provide End Time",
+
+      },
+
+
+    },
+    errorPlacement: function (error, element) {
+
+      error.appendTo(element.next('div'));
+      element.next('div').show();
+
+
+    },
+  });
+  //    $("#msform").valid();
+
+});
+
+             </script>
+
+</section>
+{% endblock step_one %}
+

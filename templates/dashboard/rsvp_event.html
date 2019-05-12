@@ -1,0 +1,83 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} RSVP of event name - Ercess Live {% endblock title %}
+{% block og %}
+<link rel="stylesheet" type="text/css" href="/static/assets/vendor_components/datatable/datatables.min.css"/>
+
+<section class="content">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">RSVPs</h1>
+                <div class="alert alert-info text-center mb-80">
+                    <h4>OOPS! NOTHING TO SHOW</h4>
+                </div>
+                <div class="table-responsive">
+                    <table id="example" class="table table-hover display nowrap w-p100">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Received on</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                            <tr>  
+                                <td>Customer name</td>
+                                <td>customer_email@gmail.com</td>
+                                <td>9988776655</td>
+                                <td>24 Oct 2018, 01:00 PM</td>
+                            </tr> 
+                        </tbody>                  
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Received on</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="/static/assets/vendor_components/datatable/datatables.min.js"></script>
+    
+    <!-- SoftPro admin for Data Table -->
+    <script src="/static/js/pages/data-table.js"></script>
+    <script src="/static/js/pages/project-table.js"></script>
+{% endblock og %}

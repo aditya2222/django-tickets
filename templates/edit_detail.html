@@ -1,0 +1,146 @@
+{% extends "dashboard/create_event.html" %}
+{% load static %}
+{% block title %} Edit your event - Ercess Live {% endblock title %}
+
+{% block og %}
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-dark mb-30">Edit {{ article.event_name}}</h1>
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#basic">Basic</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#targets">Targets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#description">Description</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#tickets">Tickets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#custom-question">Custom Question</a>
+                  </li>
+              </ul>
+
+              <div class="tab-content">
+
+                <div id="basic" class="tab-pane active">
+                  <div class="row">
+                    <div class="col-md-8 mb-30">
+                      <h3 class="dark-grey-text">Event Name:</h3>
+                      <p>{{ article.event_name}}</p>
+                    </div>
+                    <div class="col-md-4 float-right">
+                      <div class="float-right">
+                        <a class="btn btn1 btn-danger mt-15" href="{% url 'dashboard:edit-event' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Start date:</h4>
+                      <p >{{ article.sdate|date:'Y-m-d'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Start time:</h4>
+                      <p class="text-uppercase">{{ article.start_time }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">End date:</h4>
+                      <p>{{ article.edate |date:'Y-m-d'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">End time:</h4>
+                      <p class="text-uppercase">{{ article.end_time }}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mb-30">
+                      <h4 class="dark-grey-text">Address line 1:</h4>
+                      <p>{{ article.address_line1}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h4 class="dark-grey-text">Address line 2:</h4>
+                      <p>{{ article.address_line2}}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-3 mb-30">
+                      <h4 class="dark-grey-text">Pincode:</h4>
+                      <p>{{ article.pincode}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">City:</h4>
+                      <p>{{ article.city}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">State:</h4>
+                      <p>{{ article.state}}</p>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="dark-grey-text">Country:</h4>
+                      <p>{{ article.country}}</p>
+                    </div>
+                  </div>
+                </div>
+                  <div id="targets" class="tab-pane ">
+                      <a  href="{% url 'dashboard:edit-event-two' article.id  %}">Edit</a>
+                  </div>
+                  <div id="images" class="tab-pane ">
+                      <h4 class="dark-grey-text">Profile Image</h4>
+                      <p>{{ article.profile_image }}</p>
+                      <img src="{{ article.profile_image.url }}" alt="">
+
+                      <h4 class="dark-grey-text">Banner</h4>
+                      <img src="{{ article.banner.url }}" alt="">
+                  </div>
+                  <div id="description" class="tab-pane ">
+                      <div class="row">
+                        <div class="col-md-9 mb-30">
+                          <h3 class="dark-grey-text">Description:</h3>
+                          {{ article.description | safe}}
+                        </div>
+                        <div class="col-md-3 float-right">
+                          <div class="float-right">
+                            <a class="btn btn1 btn-danger mt-15" href="{% url 'dashboard:edit-event' article.id  %}"><i class="fa fa-pencil"></i> Edit</a>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div id="tickets" class="tab-pane ">
+                      <h4>Ticket Details:</h4>
+                      <div class="col-md-6  mb-30">
+                        <h4>Ticket Name : </h4>
+                      <p>{{ tickets.ticket_name }}</p>
+                      </div>
+                      <div class="col-md-6 mb-30">
+                      <h4>Ticket Price:</h4>
+                      <p>{{ tickets.ticket_price }}</p>
+                      </div>
+                      <div class="col-md-6 mb-30">
+                      <h4>Quantity:</h4>
+                      <p>{{ tickets.ticket_qty }}</p>
+                      </div>
+                      <div class="col-md-6 mb-30">
+                      <h4>Other Charges:</h4>
+                      <p>{{ tickets.other_charges }}</p>
+                      </div>
+
+                  </div>
+                  <div id="custom-question" class="tab-pane ">
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock og %}

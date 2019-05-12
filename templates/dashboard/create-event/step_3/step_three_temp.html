@@ -1,0 +1,345 @@
+{% extends "dashboard/create_event.html" %}
+{% load rest_framework %}
+{% load static %}
+{% block title %}Upload Images - Ercess Live{% endblock title %}
+
+{% block step_three %}
+
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Upload Images</h1>
+                <div class="md-stepper-horizontal red">
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active done">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <form action="{% url 'dashboard:step_three_action' md5 event_id %}" enctype="multipart/form-data" method="POST" id="msform1" class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+        <fieldset>
+            <div class="row">
+            <div class="form-group col-md-6" >
+                <label>Thumbnail</label>
+                
+                  <input id="menu_images1" class="form-control" type="file"  name="myfile1" >
+                  <p>Kindly Upload your company logo only</p>
+                  <img id="menu_image1" class="preview_img1" />
+                  <div id="e1" style="display: none;" class="alert alert-danger">
+                      <strongn id="error1" style="color: white"></strong>
+                   </div>
+                  
+                  
+            </div>
+            
+
+            <div class="form-group col-md-6" >
+            <label>Banner Image</label>
+                
+                  <input id="menu_images" class="form-control" type="file"  name="myfile" required>
+                  <img id="menu_image" class="preview_img" />
+                  <div id="e" class="alert alert-danger" style="display: none;">
+                      <strongn id="error" style="color: white;"></strong>
+                   </div>
+                </div>
+              
+
+            <div class="form-group col-12" >
+                <label>Editable Image</label>
+                
+                  <input id="menu_images2" class="form-control block" type="file"  name="myfile2">
+                  <img id="menu_image2" class="preview_img2" />
+                  <div id="e2" style="display: none;" class="alert alert-danger">
+                      <strongn id="error2" class="align-middle" style="color: white"></strong>
+                   </div>
+            </div>
+          
+  
+            <button type="submit" class="btn btn1 btn-danger btn-block mt-10">Upload</button>
+
+
+
+        </fieldset>
+    </form>
+    <!-- <img src="{% static '/images/events/1.jpg' %}"> -->
+    
+
+  </section>
+
+
+    
+    <script>
+document.getElementById("menu_images").onchange = function () {
+
+     var reader = new FileReader();
+
+                var _URL = window.URL || window.webkitURL;
+                let file = this.files[0]
+                let image = new Image()
+
+                image.src = _URL.createObjectURL(file);
+
+
+                image.onload = function () {
+                  console.log(this.width)
+                  console.log(this.height)
+                  console.log(this.width<this.height)
+                  if(this.width < 800){
+                          document.getElementById('e').style.display = "block";
+                          if(document.getElementById("error").innerText == 'Width should be more than 800 px'){
+                            document.getElementById("error").innerHTML = '';
+                          }
+                          else{
+                          document.getElementById("error").innerHTML = "Width should be more than 800 px" ;
+                          }
+                          $("#menu_image").attr("src","blank");
+                          $("#menu_image").hide();  
+                          $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+                          $('#menu_images').unwrap();     
+                          return false;
+                  }
+                  if(this.width < this.height){
+                    console.log('width is smaller')
+                      document.getElementById('e').style.display = "block";
+                      if(document.getElementById("error").innerText == 'Image should be horizontally longer'){
+                          document.getElementById("error").innerHTML = '';
+                        }
+                        else{
+                        document.getElementById("error").innerHTML = "Image should be horizontally longer" ;
+                        }
+                        $("#menu_image").attr("src","blank");
+                      $("#menu_image").hide();  
+                      $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+                      $('#menu_images').unwrap();     
+                      return false;
+                           
+                  }
+                }
+   
+    document.getElementById('e').style.display = "none";
+
+    if(this.files[0].size>2097152){
+        document.getElementById('e').style.display = "block";
+        if(document.getElementById("error").innerText == 'Image Size should not be greater than 2 MB'){
+              document.getElementById("error").innerHTML = '';
+            }
+            else{
+            document.getElementById("error").innerHTML = "Image Size should not be greater than 2 MB" ;
+            }
+
+
+
+
+        $("#menu_image").attr("src","blank");
+        $("#menu_image").hide();  
+        $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+        $('#menu_images').unwrap();     
+        return false;
+    }
+
+    if(this.files[0].type.indexOf("image")==-1){
+        document.getElementById('e').style.display = "block";
+        if(document.getElementById("error").innerText == 'Invalid Type'){
+              document.getElementById("error").innerHTML = '';
+            }
+            else{
+            document.getElementById("error").innerHTML = "Invalid Type" ;
+            }
+        
+        $("#menu_image").attr("src","blank");
+        $("#menu_image").hide();  
+        $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+        $('#menu_images').unwrap();         
+        return false;
+    }   
+    // if(this.files[0].type !== 'image/png'){
+    //     document.getElementById('e').style.display = "block";
+    //     if(document.getElementById("error").innerText == 'Only png format allowed.'){
+    //           document.getElementById("error").innerHTML += '';
+    //         }
+    //         else{
+    //         document.getElementById("error").innerHTML += 'Only png format allowed.' ;
+    //         }
+        
+    //     $("#menu_image").attr("src","blank");
+    //     $("#menu_image").hide();  
+    //     $('#menu_images').wrap('<form>').closest('form').get(0).reset();
+    //     $('#menu_images').unwrap();         
+    //     return false;
+    // }   
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("menu_image").src = e.target.result;
+        $("#menu_image").show(); 
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+
+
+document.getElementById("menu_images1").onchange = function () {
+
+    var reader = new FileReader();
+    document.getElementById('e1').style.display = "none";
+
+      var _URL = window.URL || window.webkitURL;
+                let file = this.files[0]
+                let image = new Image()
+
+                image.src = _URL.createObjectURL(file);
+
+
+                image.onload = function () {
+                  console.log(this.width)
+                  console.log(this.height)
+                  console.log(this.width<this.height)
+                  if(this.width !== this.height){
+                          document.getElementById('e1').style.display = "block";
+                          if(document.getElementById("error1").innerText == 'Image should be squared'){
+                            document.getElementById("error1").innerHTML = '';
+                          }
+                          else{
+                          document.getElementById("error1").innerHTML = "Image should be squared" ;
+                          }
+                          $("#menu_image1").attr("src","blank");
+                          $("#menu_image1").hide();  
+                          $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+                          $('#menu_images1').unwrap();     
+                          return false;
+                  }
+  
+                }
+
+    if(this.files[0].size>2097152){
+        document.getElementById('e1').style.display = "block";
+        
+        if(document.getElementById("error1").innerText == 'Image Size should not be greater than 2 MB'){
+              document.getElementById("error1").innerHTML = '';
+            }
+            else{
+            document.getElementById("error1").innerHTML = "Image Size should not be greater than 2 MB" ;
+            }
+        
+        $("#menu_image1").attr("src","blank");
+        $("#menu_image1").hide();  
+        $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+        $('#menu_images1').unwrap();     
+        return false;
+    }
+
+    if(this.files[0].type.indexOf("image")==-1){
+        document.getElementById('e1').style.display = "block";
+        if(document.getElementById("error1").innerText == 'Invalid Type'){
+              document.getElementById("error1").innerHTML = '';
+            }
+            else{
+            document.getElementById("error1").innerHTML = "Invalid Type" ;
+            }
+        
+        $("#menu_image1").attr("src","blank");
+        $("#menu_image1").hide();  
+        $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+        $('#menu_images1').unwrap();         
+        return false;
+    }   
+    if(this.files[0].type !== 'image/png'){
+        document.getElementById('e1').style.display = "block";
+        if(document.getElementById("error1").innerText == 'Only png format allowed.'){
+              document.getElementById("error1").innerHTML = '';
+            }
+            else{
+            document.getElementById("error1").innerHTML = 'Only png format allowed.' ;
+            }
+        
+        $("#menu_image1").attr("src","blank");
+        $("#menu_image1").hide();  
+        $('#menu_images1').wrap('<form>').closest('form').get(0).reset();
+        $('#menu_images1').unwrap();         
+        return false;
+    }   
+    console.log('reached required')
+    reader.onload = function (e) {
+      console.log(e.target.result)
+        // get loaded data and render thumbnail.
+        document.getElementById("menu_image1").src = e.target.result;
+        $("#menu_image1").show(); 
+    };
+
+      reader.readAsDataURL(this.files[0]);
+
+};
+
+document.getElementById("menu_images2").onchange = function () {
+    var reader = new FileReader();
+    console.log('inside onchange handler')
+
+
+      console.log('inside next handler')
+        document.getElementById('e2').style.display = "none";
+        var val = $(this).val().toLowerCase(),
+            regex = new RegExp("(.*?)\.(ai|psd|cdr)$");
+
+        if (!(regex.test(val))) {
+            $(this).val('');
+            document.getElementById('e2').style.display = "block";
+            if(document.getElementById("error2").innerText == 'Please select only AI, PSD, CDR format file'){
+              document.getElementById("error2").innerHTML = '';
+            }
+            else{
+            document.getElementById("error2").innerHTML = "Please select only AI, PSD, CDR format file" ;
+            }
+
+            return false
+        }
+
+
+   reader.readAsDataURL(this.files[0]);
+  
+};
+
+</script>
+
+
+{% endblock step_three %}

@@ -1,0 +1,260 @@
+
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %} Dashboard - Ercess Live {% endblock title %}
+{% block og %}
+
+
+<section class="content">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info text-center mt-50 mb-200">
+                    <h4>WELCOME TO YOUR DASHBOARD</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock og %}
+<!--
+    <!DOCTYPE html>
+    <html class="no-js" lang="en">
+        <head>
+
+            <title>Contact Ercess Live</title>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+            <meta name="description" content="Contact us and get to know how we can amplify your event's revenue.">
+            <meta name="keywords" content="contact, contact us, contact Ercess Live, Ercess Live">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script-->
+    {#        <?php include('common/css.php'); ?>#}
+    {#        <!--[if IE]>#}
+    {#            <script src="js/html5shiv.js"></script>#}
+    {#        <![endif]-->#}
+             <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            {% include 'static/common/css.html' %}
+             <style>
+                 label{
+            visibility: hidden;
+            display: none;
+        }
+            </style>
+            <script>
+                $(document).ready(function () {
+
+                    $("#id_other").hide();
+                    $("#id_choices").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+                    $("#id_other").addClass("bg-transparent border-color-medium-dark-gray medium-input");
+                    $( "#choices" ).append( $( "#id_choices" ) );
+                    $( "#otherarea" ).append( $( "#id_other" ) );
+
+
+                     $("select#id_choices").change(function(){
+                         var flag = 0 ;
+                            var selectedval = $(this).children("option:selected").val();
+
+                             if (selectedval== 'others') {
+                                  //  block of code to be executed if the condition is true
+                                 $("#id_other").show();
+                                 if (flag == 1){
+                                     $("#id_other").show();
+                                     flag = 0;
+                                 }
+                                }
+                             else{
+                                    $("#id_other").hide();
+                                    flag = 1 ;
+                             }
+                        });
+
+
+
+                });
+
+            </script>
+             <style>
+
+            .pad-top-30 {
+                padding-top: 30px;
+            }
+
+           label{
+            visibility: hidden;
+            display: none;
+        }
+            #howform{
+
+                margin-top: 5%;
+
+            }
+            #border {
+                {#border: 1px solid lightgray;#}
+                 background: white;
+                border-radius: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                margin-left: 30px;
+
+            }
+            .grayer{
+                background: white;
+
+            }
+                 .medium-size-font{
+                     font-size: 15px;
+                 }
+        </style>
+        </head>
+    <body class="grayer">
+
+    {% if sub %}
+
+           <div class="container" id="howform" >
+        <div class="row">
+
+
+            <div class="col-md-12" id="border">
+
+
+                <div class="row">
+
+                   <div class="col-md-12" >
+                       <h1 > <center>Welcome to dashboard!!!!</center></h1>
+                       <br><br>
+                   </div>
+
+               </div>
+
+
+               </div>
+
+        </div>
+        </div>
+
+    {% else %}
+
+        <script>
+
+         $(document).ready(function () {
+
+             setTimeout(myFunction, 3000);
+
+
+              function myFunction() {
+                          {#alert('Hello');#}
+    //                     console.log('calling a myfunction')
+                         $('#myModal').modal('show');
+                        }
+
+              $("#howsub").click(function(){
+                $("#id_other").remove();
+              });
+
+
+         });
+
+        </script>
+
+      <div class="container" id="howform" >
+        <div class="row">
+
+
+            <div class="col-md-12" id="border">
+
+
+                <div class="row">
+
+                   <div class="col-md-12" >
+                       <h1 > <center>Welcome to dashboard!!!!</center></h1>
+                       <br><br>
+                   </div>
+
+               </div>
+
+
+               </div>
+
+        </div>
+        </div>
+
+
+
+      <!-- Modal -->
+      <!--div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <!--div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title medium-size-font">How do you know about Ercess Live ?</h4>
+            </div>
+            <div class="modal-body">
+               <div class="container" id="howform" >
+                <div class="row">
+
+                <form method="post" >
+                <div class="col-md-5 col-sm-6 col-xs-10 col-lg-5" id="border">
+                 {% csrf_token %}
+                 {{ form }}
+
+                <br>
+
+                <div class="row">
+
+
+
+               </div>
+
+               <div class="row">
+
+                   <div class="col-md-12" id="choices">
+
+                   </div>
+
+               </div>
+
+               <div class="row">
+
+                   <div class="col-md-12" id="otherarea">
+
+                   </div>
+
+               </div>
+
+         <center><button  type="submit" id="howsub" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top xs-no-margin-top" >submit</button></center>
+            </div>
+
+         </form>
+            </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    {% endif %}
+
+
+
+    </body>
+    </html>
+
+-->
+
+
+

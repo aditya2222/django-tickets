@@ -1,0 +1,301 @@
+{% extends 'dashboard/create_event.html' %}
+
+{% block title %}Event details - Ercess Live {% endblock title %}
+{% block og1 %}
+<section class="content">
+    <div class="container arrow-steps clearfix">
+    <div class="container arrow-steps clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-dark mb-30">Edit your event</h1>
+                <div class="md-stepper-horizontal red">
+                    <div class="md-step active">
+                      <div class="md-step-circle"><span>1</span></div>
+                      <div class="md-step-title">Basic details</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>2</span></div>
+                      <div class="md-step-title">Set targets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>3</span></div>
+                      <div class="md-step-title">Upload images</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>4</span></div>
+                      <div class="md-step-title">Description</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>5</span></div>
+                      <div class="md-step-title">Add tickets</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                    <div class="md-step">
+                      <div class="md-step-circle"><span>6</span></div>
+                      <div class="md-step-title">Custom questions</div>
+                      <div class="md-step-bar-left"></div>
+                      <div class="md-step-bar-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <form action="{% url 'dashboard:edit-action-one' event_id %}" method="POST"  class="col-md-12 mt-50 mb-50" autocomplete="off">    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info border-info"><i class="ti-pencil"></i></span>
+                    </div>
+                    <input name="event_name" type="text" class="form-control" value="{{s.0}}" required  >
+                    <div class="input-error"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+     <div class="form-group">
+                <div class="input-group mb-3">
+                      <div class="input-group-prepend"> <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span></div>
+                      <input name="sdate" type="text" class="form-control" id="datepicker" value="{{s.1}}" >
+            <div class="input-error"></div>
+                </div>
+     </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                    </div>
+                    <input name="start_time" id="timepicker" class="input-small form-control" value="{{s.2}}" type="text" required >
+                    <div class="input-error"></div>
+        
+                </div>
+            </div>
+        </div>
+        </div>
+                
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                             
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info border-info"><i class="ti-calendar"></i></span>
+                    </div>
+                    <input name="edate" class="form-control" id="enddatepicker" type="text" value="{{s.3}}" required >
+                    <div class="input-error"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info border-info"><i class="ti-time"></i></span>
+                        </div>              
+                        <input name="end_time" id="timepicker1" class="input-small form-control" value="{{s.4}}" type="text" required  >
+                        <div class="input-error"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="alert alert-info">
+                            In case of outdoor event, provide the address of start point.
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                            </div>
+                            <input name="address_line1" id="street_number" type="text" class="form-control street_number route sublocality_level_2" value="{{s.5}}" >
+                            <div class="input-error"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                  <script type="text/javascript">
+                 var componentForm = {
+                        street_number: 'long_name',
+                        route: 'long_name',
+                        neighborhood: 'long_name',
+                    sublocality_level_1: 'long_name',
+                    sublocality_level_2: 'long_name',
+                        locality: 'long_name',
+                    administrative_area_level_4: 'long_name',
+                    administrative_area_level_3: 'short_name',
+                        administrative_area_level_1: 'long_name',
+                    administrative_area_level_2: 'short_name', 
+                        country: 'long_name',
+                        postal_code: 'short_name'
+                    };
+                function initAutocomplete() {
+                  // Create the autocomplete object, restricting the search to geographical
+                  // location types.
+                  autocomplete = new google.maps.places.Autocomplete( (document.getElementById('street_number')),
+                      {types: ['establishment']}
+                        );
+                  // When the user selects an address from the dropdown, populate the address
+                  // fields in the form.
+                  autocomplete.addListener('place_changed', fillInAddress);
+                }
+              
+                function fillInAddress() {
+                  // Get the place details from the autocomplete object.
+                  var place = autocomplete.getPlace();
+            //	console.log(place.address_components)
+            //	console.log(place)
+                  //alert(place.formatted_address)
+                  for (var component in componentForm) {
+                    //document.getElementsByClassName(component).value = '';
+                    //document.getElementsByClassName(component).disabled = false;
+                    var collection = document.getElementsByClassName(component)
+                    for (index = 0; index < collection.length; ++index) {
+                       collection[index].value = ""
+                  //  collection[index].disabled =false;
+                }
+                  }
+                  for (var i = 0; i < place.address_components.length; i++) {
+                     var addressType = place.address_components[i].types[0];
+                      if (componentForm[addressType]) {
+                          var val = place.address_components[i][componentForm[addressType]];
+                       //   document.getElementById(addressType).value = val;
+                    var collection = document.getElementsByClassName(addressType)
+                    for (index = 0; index < collection.length; ++index) {
+                               if(collection[index].value == ""){
+                                collection[index].value =val;
+                        }
+                        else{
+                            var previous = collection[index].value
+                            collection[index].value = previous +", "+val;
+                        }
+                    }
+                    
+                    
+                      }
+                  }
+                var lat =  place.geometry.location.lat();
+                var long = place.geometry.location.lng();
+            //	      console.log("hen");
+            //	      console.log(lat);
+            //	       alert(lat)
+              document.getElementsByName('latitude')[0].value = lat;
+              document.getElementsByName('longitude')[0].value = long;
+            
+                myMap(lat, long);
+              }
+            function myMap(lat, long) {
+                
+                var pos = {lat: lat, lng: long};
+                var mapProp= {
+                  center:pos,
+                    zoom:14,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+            var map = new google.maps.Map(document.getElementById("map"),mapProp);
+            var marker = new google.maps.Marker({position: pos, map: map});
+            
+            }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWfptEfuRFJAMKh1XQOZQMZQ0q9qOtrm0&libraries=places&callback=initAutocomplete" async defer></script>
+            
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                    </div>
+                                    <input name="address_line2" id="route" type="text" class="form-control neighborhood sublocality_level_1  administrative_area_level_4 administrative_area_level_2" value="{{s.6}}" readonly >
+                                    <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                    </div>
+                                    <input name="city" type="text" id='locality' class="form-control locality administrative_area_level_3" value="{{s.7}}" readonly>
+                                    <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                    </div>
+                                    <input name="state" type="text" id="administrative_area_level_1" class="form-control administrative_area_level_1 " value="{{s.8}}" readonly >
+                                    <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                    </div>
+                                    <input name="country" id="country" type="text" class="form-control country" value="{{s.9}}" readonly  >
+                                    <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-info border-info"><i class="ti-location-pin"></i></span>
+                                    </div>
+                                    <input name="pincode" id="postal_code" type="text" class="form-control postal_code" value="{{s.10}}" readonly >
+                                    <div class="input-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                        <div class="col-md-6">
+                            <div id="map" ></div>
+                        </div>
+                        </div>
+                       
+                        <button type="submit" class="btn btn1 btn-danger btn-block mt-10">Update & next</button>
+
+</form>
+</section>
+
+
+<script src="/static/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+{% endblock og1 %}
